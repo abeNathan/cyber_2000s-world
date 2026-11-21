@@ -223,12 +223,36 @@ remove.className="delete-photo";
 remove.dataset.photoKey=photo.key;
 remove.textContent="✕ DELETE";
 remove.setAttribute("aria-label","Foto löschen");
-card.append(img,caption,description,remove);
+const edit=document.createElement("button");
+edit.type="button";
+edit.className="edit-photo";
+edit.dataset.photoKey=photo.key;
+edit.textContent="✎ EDIT TEXT";
+edit.setAttribute("aria-label","Bildtext bearbeiten");
+card.append(img,caption,description,edit,remove);
 target.append(card);
 });
 }catch(error){if(status)status.textContent=error.message;}
 }
 content.addEventListener("click",async e=>{
+const editButton=e.target.closest(".edit-photo");
+if(editButton){
+const currentCaption=editButton.parentElement.querySelector(".photo-caption").textContent;
+const nextCaption=prompt("Bildtext bearbeiten (max. 240 Zeichen):",currentCaption);
+if(nextCaption===null)return;
+const adminSecret=prompt("Admin-Schlüssel eingeben, um den Bildtext zu speichern:");
+if(!adminSecret)return;
+editButton.disabled=true;
+const status=document.getElementById("galleryStatus");
+if(status)status.textContent="Bildtext wird gespeichert...";
+try{
+const response=await fetch("/api/gallery",{method:"PATCH",headers:{"Content-Type":"application/json","X-Gallery-Admin":adminSecret},body:JSON.stringify({key:editButton.dataset.photoKey,caption:nextCaption}),credentials:"same-origin"});
+const result=await response.json();
+if(!response.ok)throw new Error(result.error||"Bildtext konnte nicht gespeichert werden.");
+await renderPersonalPhotos();
+}catch(error){if(status)status.textContent=error.message;editButton.disabled=false;}
+return;
+}
 const button=e.target.closest(".delete-photo");
 if(!button)return;
 if(!confirm("Dieses Foto dauerhaft aus der gemeinsamen Galerie löschen?"))return;
