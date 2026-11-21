@@ -35,10 +35,15 @@ async function galleryApi(request, env, path) {
 
     if (path === "/api/gallery" && request.method === "GET") {
         const listed = await env.GALLERY_BUCKET.list({ prefix: "photos/", limit: 200 });
-        const photos = listed.objects.map(object => ({
-            key: object.key,
-            uploaded: object.uploaded ? object.uploaded.toISOString() : null
-        })).reverse();
+        const photos = await Promise.all(listed.objects.map(async object => {
+            const stored = await env.GALLERY_BUCKET.get(object.key);
+            return {
+                key: object.key,
+                uploaded: object.uploaded ? object.uploaded.toISOString() : null,
+                caption: stored && stored.customMetadata ? (stored.customMetadata.caption || "") : ""
+            };
+        }));
+        photos.reverse();
         return json({ photos });
     }
 
@@ -61,6 +66,7 @@ async function galleryApi(request, env, path) {
         }
         const form = await request.formData();
         const files = form.getAll("photos").filter(value => value instanceof File);
+        const captions = form.getAll("captions").filter(value => typeof value === "string").map(value => value.slice(0, 240));
         if (!files.length || files.length > 6) return json({ error: "Bitte 1 bis 6 Bilder auswählen." }, 400);
         const allowed = new Map([["image/jpeg", "jpg"], ["image/png", "png"], ["image/webp", "webp"], ["image/gif", "gif"]]);
         const uploaded = [];
@@ -69,11 +75,14 @@ async function galleryApi(request, env, path) {
                 return json({ error: "Nur JPG, PNG, WEBP oder GIF bis 5 MB pro Bild sind erlaubt." }, 400);
             }
         }
-        for (const file of files) {
+        for (const [index, file] of files.entries()) {
             const key = "photos/" + crypto.randomUUID() + "." + allowed.get(file.type);
             await env.GALLERY_BUCKET.put(key, file.stream(), {
                 httpMetadata: { contentType: file.type, cacheControl: "private, max-age=300" },
-                customMetadata: { originalName: file.name.slice(0, 120) }
+                customMetadata: {
+                    originalName: file.name.slice(0, 120),
+                    caption: (captions[index] || "").trim()
+                }
             });
             uploaded.push(key);
         }
