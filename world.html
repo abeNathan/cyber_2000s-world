@@ -95,6 +95,29 @@ footer{text-align:center;padding:5px 15px 28px;color:#80664c;font:9px Arial;lett
 @media(max-width:480px){.sewing-studio{padding:10px}.swatches{gap:4px}.swatches span{font-size:6px}.project-list>div{grid-template-columns:70px 1fr}}
 
 
+
+.digicam-gallery{margin:14px 0;padding:13px;background:linear-gradient(145deg,#e2d4b7,#b8a184);color:#352317;border:4px ridge #94734f;box-shadow:0 8px 22px #0008;font-family:Arial,sans-serif}
+.digicam-top{display:flex;justify-content:space-between;padding:0 2px 9px;border-bottom:1px solid #80684e;font-size:8px;font-weight:bold;letter-spacing:1.5px;color:#483322}
+.digicam-top span:last-child{color:#8d3326}
+.photo-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:13px 0}
+.photo-frame{padding:6px 6px 8px;background:#f2e9d8;box-shadow:0 2px 5px #4c382855;transform:rotate(-1deg)}
+.photo-frame:nth-child(2n){transform:rotate(1.2deg)}
+.photo-shot{position:relative;aspect-ratio:4/3;overflow:hidden;background:#584333}
+.photo-shot:before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,transparent 35%,#f5d9a333 36% 38%,transparent 39%),radial-gradient(ellipse at 70% 25%,#e6c18b 0 9%,transparent 10%),linear-gradient(160deg,#8d7054,#35251e 70%)}
+.photo-shot:after{content:"";position:absolute;width:42%;height:72%;left:30%;bottom:-8%;border-radius:48% 48% 12% 12%;background:linear-gradient(90deg,#251b18,#7c5942 48%,#211714);box-shadow:0 -13px 0 -5px #201713}
+.shot-two:before{background:radial-gradient(circle at 50% 48%,#d6b987 0 18%,transparent 19%),linear-gradient(135deg,#9b775b,#4b3429)}
+.shot-two:after{width:30%;height:60%;left:35%;background:linear-gradient(90deg,#4a2e21,#c5a47a,#493024);border-radius:5px}
+.shot-three:before{background:linear-gradient(160deg,#d2a16d,#87583f 55%,#35251e)}
+.shot-three:after{width:50%;height:48%;left:25%;background:linear-gradient(90deg,#493023,#a57b54,#38241b);border-radius:50% 50% 0 0}
+.shot-four:before{background:radial-gradient(ellipse at 25% 25%,#e6cba0 0 10%,transparent 11%),linear-gradient(145deg,#6f6550,#30271e)}
+.shot-four:after{width:35%;height:55%;left:32%;background:linear-gradient(90deg,#25201b,#9c8060,#2a211b)}
+.photo-shot span{position:absolute;z-index:2;top:5px;left:6px;color:#fff2d9;font:9px monospace;text-shadow:0 1px 3px #000}
+.photo-frame b{display:block;margin-top:7px;font-size:8px;letter-spacing:.8px;color:#493324}
+.photo-frame small{display:block;margin-top:3px;font-size:8px;color:#81684f}
+.camera-status{display:flex;justify-content:space-between;padding-top:8px;border-top:1px solid #80684e;font:7px monospace;letter-spacing:.5px;color:#58402c}
+.gallery-note{font:10px/1.6 Arial,sans-serif;color:#d9c5a8}
+@media(max-width:480px){.digicam-gallery{padding:9px}.photo-grid{gap:8px}.photo-frame{padding:4px 4px 6px}.photo-frame b{font-size:7px}}
+
 .vinyl-store{margin:15px 0;padding:15px;background:linear-gradient(145deg,#2a150d,#120602);border:1px solid #9b754d;box-shadow:inset 0 0 25px #0008}
 .vinyl-store-head{display:flex;justify-content:space-between;padding-bottom:10px;border-bottom:1px solid #9b754d66;color:#d9bd91;font:9px Arial,sans-serif;letter-spacing:2px}
 .record-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;padding:16px 0}
@@ -145,7 +168,7 @@ fashion:{title:"THE CLOTHES RACK",body:"<p>PERSONAL STYLE FILES · 2000s INSPIRE
 sewing:{title:"THE DESIGN STUDIO",body:"<p>DESIGN FILES · FABRIC NOTES · WORK IN PROGRESS</p><div class='sewing-studio'><div class='studio-top'><span>✂ N.'S CREATIVE DESK</span><span>ISSUE 001</span></div><div class='sketch-sheet'><div class='sketch-label'>CURRENT SKETCH / 001</div><div class='garment-sketch'><div class='sketch-shirt'><i></i><b></b></div></div><div class='sketch-caption'>A piece in progress<br><small>shape · fit · details</small></div></div><div class='swatch-title'>FABRIC LIBRARY</div><div class='swatches'><div><i class='swatch denim'></i><span>VINTAGE DENIM</span></div><div><i class='swatch cord'></i><span>CHOCOLATE CORD</span></div><div><i class='swatch cotton'></i><span>CREAM COTTON</span></div><div><i class='swatch print'></i><span>RETRO PRINT</span></div></div><div class='project-list'><div><small>PROJECT 001</small><strong>DENIM REMAKE</strong><span>ALTER · REWORK · RECREATE</span></div><div><small>PROJECT 002</small><strong>CUSTOM LONGSLEEVE</strong><span>IDEA FILE · NOT STARTED</span></div><div><small>IDEA FILE</small><strong>FUTURE PIECES</strong><span>SKETCHES & RANDOM THOUGHTS</span></div></div></div><p class='studio-note'>Ein digitales Atelier für eigene Ideen. Die Entwürfe und Stoffe können später mit deinen echten Projekten ergänzt werden.</p>"},
 vinyl:{title:"THE VINYL SHELF",body:"<p>RECORD STORE · PERSONAL ROTATION · SIDE A / SIDE B</p><div class='vinyl-store'><div class='vinyl-store-head'><span>NOW IN ROTATION</span><span>VOL. 001</span></div><div class='record-grid'><div class='record-card'><div class='record-cover cover-dusk'><i class='record-disc'></i><b>AFTER<br>MIDNIGHT</b><small>SIDE A · 01</small></div><strong>01 / LATE NIGHT</strong><small>slow sounds · city lights</small></div><div class='record-card'><div class='record-cover cover-gold'><i class='record-disc'></i><b>GOLDEN<br>HOUR</b><small>SIDE B · 02</small></div><strong>02 / GOLDEN HOUR</strong><small>warm tones · old memories</small></div><div class='record-card'><div class='record-cover cover-rose'><i class='record-disc'></i><b>SOFT<br>FOCUS</b><small>SIDE A · 03</small></div><strong>03 / SOFT FOCUS</strong><small>dreamy tracks · repeat</small></div></div><div class='vinyl-shelf-label'>✦ THE COLLECTION ✦</div><div class='record-spines'><span>Ｎ. 001</span><span>Ｎ. 002</span><span>Ｎ. 003</span><span>Ｎ. 004</span><span>Ｎ. 005</span><span>Ｎ. 006</span></div><p class='vinyl-note'>A little archive of sounds worth keeping. Deine echten Lieblingsalben können später hier eingetragen werden.</p></div>"},
 links:{title:"THE COMPUTER",body:"<p>Meine Ecken im Internet.</p><p><a href='https://www.zalando.ch/' target='_blank' rel='noopener'>Zalando</a> · <a href='https://www.pinterest.com/' target='_blank' rel='noopener'>Pinterest</a> · <a href='https://www.youtube.com/' target='_blank' rel='noopener'>YouTube</a></p>"},
-gallery:{title:"DIGICAM GALLERY",body:"<p>Outfits, Schnappschüsse und kleine Erinnerungen.</p><p>Eine Galerie für Bilder, die hier ihren Platz bekommen.</p>"},
+gallery:{title:"DIGICAM ARCHIVE",body:"<p>FLASH ON · DATE STAMP · MEMORY CARD 001</p><div class='digicam-gallery'><div class='digicam-top'><span>Ｎ. DIGITAL CAMERA</span><span>● REC</span></div><div class='photo-grid'><div class='photo-frame'><div class='photo-shot shot-one'><span>01</span></div><b>OUTFIT / 001</b><small>mirror moments</small></div><div class='photo-frame'><div class='photo-shot shot-two'><span>02</span></div><b>DETAILS / 002</b><small>little things</small></div><div class='photo-frame'><div class='photo-shot shot-three'><span>03</span></div><b>AFTER HOURS / 003</b><small>late afternoon</small></div><div class='photo-frame'><div class='photo-shot shot-four'><span>04</span></div><b>ARCHIVE / 004</b><small>somewhere in time</small></div></div><div class='camera-status'><span>◉ MEMORY CARD</span><span>4 / 099</span><span>2000-FOREVER</span></div></div><p class='gallery-note'>A tiny archive for outfits, places and moments. Die Platzhalter können später durch deine eigenen Fotos ersetzt werden.</p>"},
 diary:{title:"DEAR DIARY...",body:"<p>Ein privater Platz für kurze Gedanken, Notizen und Dinge, die man nicht vergessen möchte.</p><p><i>Some things are better kept in a little corner of the internet.</i></p>"}
 };
 const modal=document.getElementById("modal"),title=document.getElementById("panelTitle"),content=document.getElementById("panelContent");
