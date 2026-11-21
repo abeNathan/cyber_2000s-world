@@ -89,6 +89,36 @@ async function galleryApi(request, env, path) {
         return json({ uploaded });
     }
 
+    if (path === "/api/gallery" && request.method === "PATCH") {
+        const adminSecret = env.GALLERY_ADMIN_SECRET;
+        if (!adminSecret || request.headers.get("X-Gallery-Admin") !== adminSecret) {
+            return json({ error: "Admin-Schlüssel stimmt nicht." }, 403);
+        }
+        let body;
+        try {
+            body = await request.json();
+        } catch {
+            return json({ error: "Ungültige Anfrage." }, 400);
+        }
+        const key = body && typeof body.key === "string" ? body.key : "";
+        const caption = body && typeof body.caption === "string" ? body.caption.trim().slice(0, 240) : "";
+        if (!/^photos\/[0-9a-f-]{36}\.(jpg|png|webp|gif)$/i.test(key)) {
+            return json({ error: "Ungültiger Foto-Schlüssel." }, 400);
+        }
+        const existing = await env.GALLERY_BUCKET.get(key);
+        if (!existing) return json({ error: "Foto nicht gefunden." }, 404);
+        const headers = new Headers();
+        existing.writeHttpMetadata(headers);
+        await env.GALLERY_BUCKET.put(key, await existing.arrayBuffer(), {
+            httpMetadata: headers,
+            customMetadata: {
+                ...(existing.customMetadata || {}),
+                caption
+            }
+        });
+        return json({ updated: true });
+    }
+
     if (path === "/api/gallery" && request.method === "DELETE") {
         const adminSecret = env.GALLERY_ADMIN_SECRET;
         if (!adminSecret || request.headers.get("X-Gallery-Admin") !== adminSecret) {
