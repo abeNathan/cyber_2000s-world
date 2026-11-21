@@ -11,15 +11,18 @@ header{display:flex;justify-content:space-between;align-items:center;padding:25p
 .logo{letter-spacing:4px;font-size:16px;color:#C9A66B}
 nav a{color:#E8D5B5;text-decoration:none;margin-left:30px;font:12px Arial,sans-serif;letter-spacing:2px;transition:color .3s}
 nav a:hover{color:#C9A66B}
-main{max-width:760px;margin:0 auto;text-align:center;padding:85px 24px}
+main{max-width:1050px;margin:0 auto;text-align:center;padding:85px 28px}
 h1{color:#C9A66B;letter-spacing:5px;margin:0 0 28px}
 .tagline{line-height:2;color:#D8C3A5;font:14px/2 Arial,sans-serif;letter-spacing:1px;margin:0 0 38px}
-.divider{width:min(100%,430px);height:1px;border:0;background:rgba(201,166,107,.55);margin:34px auto}
+.divider{width:min(100%,430px);height:1px;border:0;background:rgba(201,166,107,.55);margin:30px auto}
+.profile-layout{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:55px;align-items:center;text-align:center;max-width:850px;margin:0 auto}
+.profile-copy{color:#D8C3A5;font:14px/2 Arial,sans-serif;letter-spacing:.5px}
 h2{color:#C9A66B;letter-spacing:3px;font-size:19px;font-weight:normal;margin:0 0 24px}
-.description{max-width:620px;margin:0 auto;color:#D8C3A5;font:14px/2 Arial,sans-serif;letter-spacing:.5px}
 .description p{margin:0 0 18px}
 .description p:last-child{margin-bottom:0}
-@media(max-width:650px){header{flex-direction:column;gap:20px}nav a{margin:0 8px}main{padding:65px 22px}.divider{margin:28px auto}}
+.section-divider{width:min(100%,430px);height:1px;border:0;background:rgba(201,166,107,.55);margin:28px auto}
+.pixel-image{width:100%;max-width:290px;height:auto;object-fit:contain;image-rendering:pixelated;align-self:center;filter:drop-shadow(0 0 12px rgba(201,166,107,.16))}
+@media(max-width:700px){header{flex-direction:column;gap:20px}nav a{margin:0 8px}main{padding:65px 22px}.profile-layout{grid-template-columns:1fr;gap:35px}.pixel-image{width:min(70%,260px);margin:0 auto;grid-row:2}.section-divider{margin:24px auto}}
 </style>
 </head>
 <body>
@@ -28,21 +31,26 @@ h2{color:#C9A66B;letter-spacing:3px;font-size:19px;font-weight:normal;margin:0 0
 <h1>ABOUT</h1>
 <p class="tagline">COME TO MY 2000s CODED WEBSITE<br>A DIFFERENT WORLD FOR DIFFERENT PEOPLE.</p>
 <hr class="divider">
+<div class="profile-layout">
+<div class="profile-copy">
 <h2>N.</h2>
 <div class="description">
 <p>N. exists somewhere between<br>late-night thoughts,<br>old playlists<br>and forgotten websites.</p>
 <p>No one really knows much.<br>Maybe that's the point.</p>
 </div>
-<hr class="divider">
+<hr class="section-divider">
 <div class="description">
 <p>Usually found chasing random ideas,<br>collecting memories that should've been deleted,<br>and staying awake far too long.</p>
 <p>Interests change.<br>Music stays.</p>
 </div>
-<hr class="divider">
+<hr class="section-divider">
 <div class="description">
 <p>If you somehow ended up here,<br>welcome.</p>
 <p>Stay for a while.</p>
 <p>Or don't.</p>
+</div>
+</div>
+<img class="pixel-image" src="/Meine%20Website/image/Designer.png" alt="Pixel art illustration">
 </div>
 </main>
 </body>
