@@ -198,7 +198,7 @@ async function galleryApi(request, env, path) {
 async function visitorsApi(request, env) {
     if (!env.GALLERY_BUCKET) return json({ error: "Besucherzähler ist noch nicht verbunden." }, 503);
     const cookie = request.headers.get("Cookie") || "";
-    const alreadyCounted = /(?:^|;\\s*)visitor_counted=1(?:;|$)/.test(cookie);
+    const alreadyCounted = /(?:^|;\s*)visitor_counted=1(?:;|$)/.test(cookie);
     const key = "stats/visitor-count.json";
     let count = 0;
     const stored = await env.GALLERY_BUCKET.get(key);
