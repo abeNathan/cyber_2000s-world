@@ -50,6 +50,19 @@ footer{text-align:center;padding:5px 15px 28px;color:#80664c;font:9px Arial;lett
 .panel{width:min(540px,100%);max-height:80vh;overflow:auto;background:linear-gradient(145deg,#321a10,#160803);border:1px solid var(--gold);box-shadow:0 0 35px #c9a66b33;padding:25px;position:relative}
 .close{position:absolute;right:13px;top:10px;background:none;border:0;color:var(--gold);font-size:23px;cursor:pointer}
 .panel-kicker{font:9px Arial;letter-spacing:3px;color:var(--gold)}.panel h2{font-weight:normal;letter-spacing:2px;margin:10px 0 16px}.panel-content{font:13px/1.8 Arial,sans-serif;color:#d9c5a8}.panel-content a{color:#e8c98f}.tag{display:inline-block;border:1px solid #9c784d;padding:5px 9px;margin:4px;font:10px Arial;color:#e8d5b5}
+
+.mp3-window{display:grid;grid-template-columns:150px 1fr;gap:18px;align-items:center;margin:14px 0 18px;padding:16px;background:linear-gradient(145deg,#d7d0c2,#77736c 48%,#282522);border:2px solid #eee0c6;border-radius:18px;box-shadow:inset 0 0 0 3px #4a433b,0 9px 22px #0009;color:#211a14}
+.mp3-device{min-height:230px;border-radius:14px;padding:12px;background:linear-gradient(145deg,#eee9dc,#9e988d 55%,#55514b);box-shadow:inset 2px 2px 5px #fff9,inset -3px -3px 8px #2228;display:flex;flex-direction:column;align-items:center;justify-content:space-between}
+.mp3-screen{width:100%;min-height:92px;padding:10px;background:linear-gradient(145deg,#26362b,#101b16);border:3px solid #55534c;border-radius:5px;color:#c8d9a9;font:10px/1.6 monospace;text-align:left;box-shadow:inset 0 0 12px #000}
+.mp3-screen strong{display:block;color:#e1e8c8;font-size:11px;letter-spacing:1px}
+.mp3-wheel{width:104px;height:104px;border-radius:50%;background:radial-gradient(circle,#dedbd2 0 20%,#8c8981 21% 24%,#d7d2c8 25% 65%,#77736b 66% 69%,#bdb8ad 70%);box-shadow:inset 0 2px 5px #fff9,0 2px 5px #3338;display:grid;place-items:center;color:#514b42;font:9px Arial;letter-spacing:1px}
+.mp3-tracks{font:11px/1.8 Arial,sans-serif;color:#392a20}
+.mp3-tracks h3{font:10px Arial;letter-spacing:2px;color:#8d683b;margin:0 0 8px}
+.mp3-track{padding:7px 8px;border-bottom:1px solid #a98a6844;background:#fff2}
+.mp3-track span{float:right;color:#826b4d;font-size:9px}
+.mp3-note{font:10px/1.6 Arial,sans-serif;color:#d9c5a8}
+@media(max-width:480px){.mp3-window{grid-template-columns:1fr}.mp3-device{min-height:205px}.mp3-wheel{width:90px;height:90px}}
+
 @media(max-width:700px){header{height:auto;min-height:65px;flex-direction:column;gap:13px;padding:16px}nav{gap:20px}.room-wrap{padding:0 10px 25px}.room{height:780px;min-height:780px}.window{left:5%;top:5%;width:34%;height:19%}.curtain{left:3%;top:3%;width:38%;height:23%}.poster{left:51%;top:7%;width:24%;height:13%}.shelf{top:27%;width:48%}.monitor{top:28%;right:7%;width:29%;height:12%}.desk{top:41%;right:5%;width:42%;height:9%}.lamp{top:40%;left:43%}.bed{left:4%;bottom:15%;width:53%;height:23%}.rug{left:20%;width:65%;height:20%}.vinyl{left:3%;top:33%}.sewing{left:45%;top:51%}.mp3{left:5%;bottom:42%}.clothes{right:3%;top:56%}.camera{left:7%;bottom:5%}.diary{right:27%;bottom:5%}.computer{right:5%;top:19%}.avatar{width:90px;right:1%;bottom:1%}.avatar-note{right:2%;bottom:14%}.plant{font-size:35px;right:2%;bottom:9%}.statusbar{font-size:8px;letter-spacing:1px}}
 </style>
 </head>
@@ -75,7 +88,7 @@ footer{text-align:center;padding:5px 15px 28px;color:#80664c;font:9px Arial;lett
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="panelTitle"><div class="panel"><button class="close" aria-label="Fenster schliessen" id="close">×</button><div class="panel-kicker">N.'S PERSONAL ARCHIVE</div><h2 id="panelTitle"></h2><div class="panel-content" id="panelContent"></div></div></div>
 <script>
 const panels={
-music:{title:"MP3 PLAYER",body:"<p>Soundtrack für die Stunden, die viel zu schnell vorbeigehen.</p><span class='tag'>FAVOURITE SONGS</span><span class='tag'>LATE NIGHT PLAYLIST</span><span class='tag'>2000s THROWBACKS</span><p>Deine Songs und Playlists können hier später ergänzt werden.</p>"},
+music:{title:"MP3 PLAYER",body:"<p>YOUR PERSONAL SOUNDTRACK · PORTABLE MEMORIES</p><div class='mp3-window'><div class='mp3-device'><div class='mp3-screen'><strong>NOW PLAYING</strong>NO TRACK SELECTED<br>PLAYLIST: YOUR MIX<br>BATTERY: █████ 100%</div><div class='mp3-wheel'>MENU　●</div></div><div class='mp3-tracks'><h3>PLAYLIST LIBRARY</h3><div class='mp3-track'>01 · FAVOURITE SONGS <span>—:—</span></div><div class='mp3-track'>02 · LATE NIGHT MIX <span>—:—</span></div><div class='mp3-track'>03 · 2000s THROWBACKS <span>—:—</span></div><div class='mp3-track'>04 · ON REPEAT <span>—:—</span></div></div></div><p class='mp3-note'>Your music corner is ready. Song titles and real playback can be added when your track list is ready.</p>"},
 fashion:{title:"THE CLOTHES RACK",body:"<p>Outfits, Fundstücke und Ideen für den Kleiderschrank.</p><span class='tag'>BOOTCUT JEANS</span><span class='tag'>BOOTS</span><span class='tag'>LONGSLEEVES</span><span class='tag'>OUTFIT INSPO</span>"},
 sewing:{title:"SEWING CORNER",body:"<p>Eigene Designs, kleine Experimente und Nähprojekte.</p><p>Ein digitales Skizzenbuch für alles, was irgendwann Realität werden soll.</p>"},
 vinyl:{title:"VINYL COLLECTION",body:"<p>Schallplatten, Cover-Art und Alben, die einen Platz im Regal verdienen.</p><p>Die Sammlung wird Stück für Stück ergänzt.</p>"},
