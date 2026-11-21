@@ -63,6 +63,17 @@ footer{text-align:center;padding:5px 15px 28px;color:#80664c;font:9px Arial;lett
 .mp3-note{font:10px/1.6 Arial,sans-serif;color:#d9c5a8}
 @media(max-width:480px){.mp3-window{grid-template-columns:1fr}.mp3-device{min-height:205px}.mp3-wheel{width:90px;height:90px}}
 
+
+.fashion-board{margin:16px 0;padding:15px;background:linear-gradient(145deg,#2b160e,#130703);border:1px solid #9b754d;box-shadow:inset 0 0 22px #0008}
+.fashion-heading{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:13px;color:#d9bd91;font:9px Arial,sans-serif;letter-spacing:2px}
+.fashion-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.fashion-card{min-height:170px;padding:10px 7px;border:1px solid #8e6b49;background:linear-gradient(180deg,#503020,#241109);text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:space-between}
+.fashion-visual{height:105px;width:100%;display:grid;place-items:center;background:radial-gradient(ellipse,#765039,#241109 72%);font-size:48px;text-shadow:0 4px 8px #000}
+.fashion-card strong{display:block;color:#e5c99b;font:10px Arial,sans-serif;letter-spacing:1px}
+.fashion-card small{color:#b99b76;font:9px Arial,sans-serif}
+.fashion-footer{margin-top:13px;padding-top:10px;border-top:1px dashed #9b754d;color:#c7ab84;font:10px/1.7 Arial,sans-serif}
+@media(max-width:480px){.fashion-grid{grid-template-columns:1fr 1fr}.fashion-card{min-height:150px}.fashion-visual{height:85px}}
+
 @media(max-width:700px){header{height:auto;min-height:65px;flex-direction:column;gap:13px;padding:16px}nav{gap:20px}.room-wrap{padding:0 10px 25px}.room{height:780px;min-height:780px}.window{left:5%;top:5%;width:34%;height:19%}.curtain{left:3%;top:3%;width:38%;height:23%}.poster{left:51%;top:7%;width:24%;height:13%}.shelf{top:27%;width:48%}.monitor{top:28%;right:7%;width:29%;height:12%}.desk{top:41%;right:5%;width:42%;height:9%}.lamp{top:40%;left:43%}.bed{left:4%;bottom:15%;width:53%;height:23%}.rug{left:20%;width:65%;height:20%}.vinyl{left:3%;top:33%}.sewing{left:45%;top:51%}.mp3{left:5%;bottom:42%}.clothes{right:3%;top:56%}.camera{left:7%;bottom:5%}.diary{right:27%;bottom:5%}.computer{right:5%;top:19%}.avatar{width:90px;right:1%;bottom:1%}.avatar-note{right:2%;bottom:14%}.plant{font-size:35px;right:2%;bottom:9%}.statusbar{font-size:8px;letter-spacing:1px}}
 </style>
 </head>
@@ -89,7 +100,7 @@ footer{text-align:center;padding:5px 15px 28px;color:#80664c;font:9px Arial;lett
 <script>
 const panels={
 music:{title:"MP3 PLAYER",body:"<p>YOUR PERSONAL SOUNDTRACK · PORTABLE MEMORIES</p><div class='mp3-window'><div class='mp3-device'><div class='mp3-screen'><strong>NOW PLAYING</strong>NO TRACK SELECTED<br>PLAYLIST: YOUR MIX<br>BATTERY: █████ 100%</div><div class='mp3-wheel'>MENU　●</div></div><div class='mp3-tracks'><h3>PLAYLIST LIBRARY</h3><div class='mp3-track'>01 · FAVOURITE SONGS <span>—:—</span></div><div class='mp3-track'>02 · LATE NIGHT MIX <span>—:—</span></div><div class='mp3-track'>03 · 2000s THROWBACKS <span>—:—</span></div><div class='mp3-track'>04 · ON REPEAT <span>—:—</span></div></div></div><p class='mp3-note'>Your music corner is ready. Song titles and real playback can be added when your track list is ready.</p>"},
-fashion:{title:"THE CLOTHES RACK",body:"<p>Outfits, Fundstücke und Ideen für den Kleiderschrank.</p><span class='tag'>BOOTCUT JEANS</span><span class='tag'>BOOTS</span><span class='tag'>LONGSLEEVES</span><span class='tag'>OUTFIT INSPO</span>"},
+fashion:{title:"THE CLOTHES RACK",body:"<p>PERSONAL STYLE FILES · 2000s INSPIRED</p><div class='fashion-board'><div class='fashion-heading'><span>WARDROBE INDEX</span><span>NO. 001—003</span></div><div class='fashion-grid'><div class='fashion-card'><div class='fashion-visual'>👖</div><strong>BOOTCUT DENIM</strong><small>LOW-RISE · VINTAGE FIT</small></div><div class='fashion-card'><div class='fashion-visual'>🥾</div><strong>BOOTS</strong><small>EVERYDAY CLASSIC</small></div><div class='fashion-card'><div class='fashion-visual'>👕</div><strong>LONGSLEEVES</strong><small>LAYERING PIECES</small></div></div><div class='fashion-footer'>STYLE NOTE: relaxed silhouettes, vintage details and outfits that feel like your own.</div></div><p>Dein digitales Lookbook. Eigene Outfit-Fotos und Inspirationen können später hier dazukommen.</p>"},
 sewing:{title:"SEWING CORNER",body:"<p>Eigene Designs, kleine Experimente und Nähprojekte.</p><p>Ein digitales Skizzenbuch für alles, was irgendwann Realität werden soll.</p>"},
 vinyl:{title:"VINYL COLLECTION",body:"<p>Schallplatten, Cover-Art und Alben, die einen Platz im Regal verdienen.</p><p>Die Sammlung wird Stück für Stück ergänzt.</p>"},
 links:{title:"THE COMPUTER",body:"<p>Meine Ecken im Internet.</p><p><a href='https://www.zalando.ch/' target='_blank' rel='noopener'>Zalando</a> · <a href='https://www.pinterest.com/' target='_blank' rel='noopener'>Pinterest</a> · <a href='https://www.youtube.com/' target='_blank' rel='noopener'>YouTube</a></p>"},
