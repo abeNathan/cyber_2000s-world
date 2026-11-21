@@ -96,7 +96,7 @@ footer{text-align:center;padding:5px 15px 28px;color:#80664c;font:9px Arial;lett
 
 
 
-.personal-upload{margin:4px 0 10px;padding:12px;text-align:center;border:1px dashed #8a7154;background:#e9ddc8}.personal-upload label{display:inline-block;padding:8px 13px;background:#4a3021;color:#f4e4c5;font-size:9px;letter-spacing:1.2px;cursor:pointer}.personal-upload input{display:block;width:100%;margin-top:8px;font-size:10px;color:#493324}.personal-upload small{display:block;margin-top:7px;font-size:9px;color:#6b5540}.personal-photos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.personal-photo{padding:6px;background:#f2e9d8;box-shadow:0 2px 5px #4c382855}.personal-photo img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}.personal-photo button{margin-top:6px;border:0;background:#4a3021;color:#f4e4c5;padding:5px 8px;font-size:8px;cursor:pointer}
+.personal-upload{margin:4px 0 10px;padding:12px;text-align:center;border:1px dashed #8a7154;background:#e9ddc8}.personal-upload label{display:inline-block;padding:8px 13px;background:#4a3021;color:#f4e4c5;font-size:9px;letter-spacing:1.2px;cursor:pointer}.personal-upload input{display:block;width:100%;margin-top:8px;font-size:10px;color:#493324}.personal-upload small{display:block;margin-top:7px;font-size:9px;color:#6b5540}.personal-photos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.personal-photo{padding:6px;background:#f2e9d8;box-shadow:0 2px 5px #4c382855}.personal-photo img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}.personal-photo .photo-caption{margin:7px 1px 2px;color:#493324;font-family:Georgia,serif;font-size:12px;line-height:1.45;white-space:pre-wrap;overflow-wrap:anywhere}.personal-photo button{margin-top:6px;border:0;background:#4a3021;color:#f4e4c5;padding:5px 8px;font-size:8px;cursor:pointer}
 .digicam-gallery{margin:14px 0;padding:13px;background:linear-gradient(145deg,#e2d4b7,#b8a184);color:#352317;border:4px ridge #94734f;box-shadow:0 8px 22px #0008;font-family:Arial,sans-serif}
 .digicam-top{display:flex;justify-content:space-between;padding:0 2px 9px;border-bottom:1px solid #80684e;font-size:8px;font-weight:bold;letter-spacing:1.5px;color:#483322}
 .digicam-top span:last-child{color:#8d3326}
@@ -213,13 +213,17 @@ img.src="/api/gallery/"+encodeURIComponent(photo.key);
 img.alt="Digicam photo "+(index+1);
 const caption=document.createElement("small");
 caption.textContent="MEMORY / "+String(index+1).padStart(3,"0");
+const description=document.createElement("p");
+description.className="photo-caption";
+description.textContent=photo.caption||"";
+description.hidden=!photo.caption;
 const remove=document.createElement("button");
 remove.type="button";
 remove.className="delete-photo";
 remove.dataset.photoKey=photo.key;
 remove.textContent="✕ DELETE";
 remove.setAttribute("aria-label","Foto löschen");
-card.append(img,caption,remove);
+card.append(img,caption,description,remove);
 target.append(card);
 });
 }catch(error){if(status)status.textContent=error.message;}
@@ -248,7 +252,11 @@ if(files.length>6){alert("Bitte höchstens 6 Bilder auf einmal auswählen.");e.t
 const adminSecret=prompt("Admin-Schlüssel eingeben, um Fotos hochzuladen:");
 if(!adminSecret){e.target.value="";return;}
 const form=new FormData();
-files.forEach(file=>form.append("photos",file));
+files.forEach((file,index)=>{
+form.append("photos",file);
+const description=prompt("Text unter Foto "+(index+1)+" (optional):","");
+form.append("captions",description||"");
+});
 const status=document.getElementById("galleryStatus");
 if(status)status.textContent="Fotos werden hochgeladen...";
 try{
