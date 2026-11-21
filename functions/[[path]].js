@@ -30,6 +30,52 @@ function json(data, status = 200) {
     });
 }
 
+async function diaryApi(request, env, path) {
+    if (!env.GALLERY_BUCKET) return json({ error: "Speicher ist noch nicht verbunden." }, 503);
+    const prefix = "diary/";
+    if (path === "/api/diary" && request.method === "GET") {
+        const listed = await env.GALLERY_BUCKET.list({ prefix, limit: 100 });
+        const entries = [];
+        for (const object of listed.objects) {
+            const stored = await env.GALLERY_BUCKET.get(object.key);
+            if (!stored) continue;
+            try {
+                const entry = await stored.json();
+                entries.push(entry);
+            } catch {}
+        }
+        entries.sort((a, b) => String(b.date).localeCompare(String(a.date)) || String(b.id).localeCompare(String(a.id)));
+        return json({ entries });
+    }
+    const adminSecret = env.GALLERY_ADMIN_SECRET;
+    if (!adminSecret || request.headers.get("X-Gallery-Admin") !== adminSecret) {
+        return json({ error: "Admin-Schlüssel stimmt nicht." }, 403);
+    }
+    if (path === "/api/diary" && request.method === "POST") {
+        let body;
+        try { body = await request.json(); } catch { return json({ error: "Ungültige Anfrage." }, 400); }
+        const title = typeof body?.title === "string" ? body.title.trim().slice(0, 60) : "";
+        const date = typeof body?.date === "string" ? body.date : "";
+        const text = typeof body?.text === "string" ? body.text.trim().slice(0, 3000) : "";
+        if (!title || !/^\d{4}-\d{2}-\d{2}$/.test(date) || !text) return json({ error: "Bitte Titel, Datum und Text ausfüllen." }, 400);
+        const id = crypto.randomUUID();
+        const entry = { id, title, date, text };
+        await env.GALLERY_BUCKET.put(prefix + id + ".json", JSON.stringify(entry), {
+            httpMetadata: { contentType: "application/json; charset=utf-8" }
+        });
+        return json({ entry }, 201);
+    }
+    if (path === "/api/diary" && request.method === "DELETE") {
+        let body;
+        try { body = await request.json(); } catch { return json({ error: "Ungültige Anfrage." }, 400); }
+        const id = typeof body?.id === "string" ? body.id : "";
+        if (!/^[0-9a-f-]{36}$/i.test(id)) return json({ error: "Ungültige Eintrags-ID." }, 400);
+        await env.GALLERY_BUCKET.delete(prefix + id + ".json");
+        return json({ deleted: true });
+    }
+    return new Response("Method not allowed", { status: 405 });
+}
+
 async function galleryApi(request, env, path) {
     if (!env.GALLERY_BUCKET) return json({ error: "Die Galerie ist noch nicht vollständig verbunden." }, 503);
 
@@ -164,15 +210,17 @@ export async function onRequest(context) {
     }
 
     const protectedPages = ["/world.html", "/world", "/about.html", "/about"];
+    const isDiaryApi = path === "/api/diary";
     const isGalleryApi = path === "/api/gallery" || path.startsWith("/api/gallery/");
-    if (protectedPages.includes(path) || isGalleryApi) {
+    if (protectedPages.includes(path) || isGalleryApi || isDiaryApi) {
         const valid = await validSession(request, env.SESSION_SECRET);
         if (!valid) {
-            if (isGalleryApi) return json({ error: "Bitte zuerst anmelden." }, 401);
+            if (isGalleryApi || isDiaryApi) return json({ error: "Bitte zuerst anmelden." }, 401);
             return Response.redirect(url.origin + "/login.html", 302);
         }
     }
 
+    if (isDiaryApi) return diaryApi(request, env, path);
     if (isGalleryApi) return galleryApi(request, env, path);
     return context.next();
 }
