@@ -213,11 +213,33 @@ img.src="/api/gallery/"+encodeURIComponent(photo.key);
 img.alt="Digicam photo "+(index+1);
 const caption=document.createElement("small");
 caption.textContent="MEMORY / "+String(index+1).padStart(3,"0");
-card.append(img,caption);
+const remove=document.createElement("button");
+remove.type="button";
+remove.className="delete-photo";
+remove.dataset.photoKey=photo.key;
+remove.textContent="✕ DELETE";
+remove.setAttribute("aria-label","Foto löschen");
+card.append(img,caption,remove);
 target.append(card);
 });
 }catch(error){if(status)status.textContent=error.message;}
 }
+content.addEventListener("click",async e=>{
+const button=e.target.closest(".delete-photo");
+if(!button)return;
+if(!confirm("Dieses Foto dauerhaft aus der gemeinsamen Galerie löschen?"))return;
+const adminSecret=prompt("Admin-Schlüssel eingeben, um das Foto zu löschen:");
+if(!adminSecret)return;
+const status=document.getElementById("galleryStatus");
+if(status)status.textContent="Foto wird gelöscht...";
+button.disabled=true;
+try{
+const response=await fetch("/api/gallery",{method:"DELETE",headers:{"Content-Type":"application/json","X-Gallery-Admin":adminSecret},body:JSON.stringify({key:button.dataset.photoKey}),credentials:"same-origin"});
+const result=await response.json();
+if(!response.ok)throw new Error(result.error||"Löschen fehlgeschlagen.");
+await renderPersonalPhotos();
+}catch(error){if(status)status.textContent=error.message;button.disabled=false;}
+});
 content.addEventListener("change",async e=>{
 if(e.target.id!=="galleryUpload")return;
 const files=Array.from(e.target.files||[]);
