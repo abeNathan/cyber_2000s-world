@@ -92,7 +92,7 @@ async function galleryApi(request, env, path) {
             return json({ error: "Ungültige Anfrage." }, 400);
         }
         const key = body && typeof body.key === "string" ? body.key : "";
-        if (!/^photos\\/[0-9a-f-]{36}\\.(jpg|png|webp|gif)$/i.test(key)) {
+        if (!/^photos\/[0-9a-f-]{36}\.(jpg|png|webp|gif)$/i.test(key)) {
             return json({ error: "Ungültiger Foto-Schlüssel." }, 400);
         }
         await env.GALLERY_BUCKET.delete(key);
