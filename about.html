@@ -15,13 +15,13 @@ main{max-width:1050px;margin:0 auto;text-align:center;padding:85px 28px}
 h1{color:#C9A66B;letter-spacing:5px;margin:0 0 28px}
 .tagline{line-height:2;color:#D8C3A5;font:14px/2 Arial,sans-serif;letter-spacing:1px;margin:0 0 38px}
 .divider{width:min(100%,430px);height:1px;border:0;background:rgba(201,166,107,.55);margin:30px auto}
-.profile-layout{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:55px;align-items:center;text-align:center;max-width:850px;margin:0 auto}
+.profile-layout{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:clamp(55px,8vw,130px);align-items:center;text-align:center;width:90vw;max-width:1400px;margin:0 0 0 50%;transform:translateX(-50%)}
 .profile-copy{color:#D8C3A5;font:14px/2 Arial,sans-serif;letter-spacing:.5px}
 h2{color:#C9A66B;letter-spacing:3px;font-size:19px;font-weight:normal;margin:0 0 24px}
 .description p{margin:0 0 18px}
 .description p:last-child{margin-bottom:0}
 .section-divider{width:min(100%,430px);height:1px;border:0;background:rgba(201,166,107,.55);margin:28px auto}
-.pixel-image{width:100%;max-width:290px;height:auto;object-fit:contain;image-rendering:pixelated;align-self:center;filter:drop-shadow(0 0 12px rgba(201,166,107,.16))}
+.pixel-image{width:100%;max-width:290px;height:auto;object-fit:contain;image-rendering:pixelated;align-self:center;justify-self:end;filter:drop-shadow(0 0 12px rgba(201,166,107,.16))}
 @media(max-width:700px){header{flex-direction:column;gap:20px}nav a{margin:0 8px}main{padding:65px 22px}.profile-layout{grid-template-columns:1fr;gap:35px}.pixel-image{width:min(70%,260px);margin:0 auto;grid-row:2}.section-divider{margin:24px auto}}
 </style>
 </head>
