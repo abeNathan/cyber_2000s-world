@@ -5,8 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Access | Cyber World</title>
 <style>
-*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;background:linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.8)),url("Meine%20Website/image/brownie.jpg") center/cover fixed;color:#E8D5B5;font-family:Georgia,serif}.panel{width:min(420px,90%);padding:42px 30px;text-align:center;border:1px solid rgba(201,166,107,.55);background:rgba(27,18,13,.82)}h1{font-size:27px;letter-spacing:4px;color:#C9A66B}p{font:12px Arial,sans-serif;letter-spacing:3px}input{width:100%;margin:24px 0 16px;padding:14px;background:transparent;border:1px solid #C9A66B;color:#E8D5B5;text-align:center;letter-spacing:3px}button{padding:13px 30px;background:transparent;border:1px solid #C9A66B;color:#E8D5B5;letter-spacing:4px;cursor:pointer}button:hover{background:#C9A66B;color:#1b120d}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:#17100d;color:#ead9bd;font-family:Georgia,serif}
+.panel{width:100%;max-width:420px;padding:42px 30px;text-align:center;border:1px solid #c9a66b;background:#281b15;box-shadow:0 0 35px #000}
+h1{margin:0 0 18px;font-size:27px;letter-spacing:4px;color:#c9a66b}
+p{font:12px Arial,sans-serif;letter-spacing:3px}
+input{width:100%;margin:24px 0 16px;padding:14px;background:#17100d;border:1px solid #c9a66b;color:#ead9bd;text-align:center;letter-spacing:3px}
+button{padding:13px 30px;background:transparent;border:1px solid #c9a66b;color:#ead9bd;letter-spacing:4px;cursor:pointer}
+button:hover{background:#c9a66b;color:#17100d}
 </style>
 </head>
-<body><main class="panel"><h1>CYBER WORLD</h1><p>ENTER ACCESS CODE</p><form action="/login" method="POST"><input type="password" name="code" placeholder="ACCESS CODE" required autocomplete="current-password"><button type="submit">UNLOCK</button></form></main></body>
+<body>
+<main class="panel">
+<h1>CYBER WORLD</h1>
+<p>ENTER ACCESS CODE</p>
+<form action="/login" method="POST">
+<input type="password" name="code" placeholder="ACCESS CODE" required autocomplete="current-password">
+<button type="submit">UNLOCK</button>
+</form>
+</main>
+</body>
 </html>
