@@ -23,6 +23,18 @@ async function validSession(request, secret) {
     return signature === await sign(expiry, secret);
 }
 
+async function validAdminSession(request, secret) {
+    if (!secret) return false;
+    const cookies = request.headers.get("Cookie") || "";
+    const match = cookies.match(/admin_session=([^;]+)/);
+    if (!match) return false;
+    const parts = match[1].split(".");
+    if (parts.length !== 2) return false;
+    const [expiry, signature] = parts;
+    if (!/^\d+$/.test(expiry) || Number(expiry) < Math.floor(Date.now() / 1000)) return false;
+    return signature === await sign("admin:" + expiry, secret);
+}
+
 function json(data, status = 200) {
     return new Response(JSON.stringify(data), {
         status,
@@ -47,9 +59,8 @@ async function diaryApi(request, env, path) {
         entries.sort((a, b) => String(b.date).localeCompare(String(a.date)) || String(b.id).localeCompare(String(a.id)));
         return json({ entries });
     }
-    const adminSecret = env.GALLERY_ADMIN_SECRET;
-    if (!adminSecret || request.headers.get("X-Gallery-Admin") !== adminSecret) {
-        return json({ error: "Admin-Schlüssel stimmt nicht." }, 403);
+    if (!await validAdminSession(request, env.SESSION_SECRET)) {
+        return json({ error: "Admin-Anmeldung erforderlich." }, 403);
     }
     if (path === "/api/diary" && request.method === "POST") {
         let body;
@@ -106,9 +117,8 @@ async function galleryApi(request, env, path) {
     }
 
     if (path === "/api/gallery" && request.method === "POST") {
-        const adminSecret = env.GALLERY_ADMIN_SECRET;
-        if (!adminSecret || request.headers.get("X-Gallery-Admin") !== adminSecret) {
-            return json({ error: "Admin-Schlüssel stimmt nicht." }, 403);
+        if (!await validAdminSession(request, env.SESSION_SECRET)) {
+            return json({ error: "Admin-Anmeldung erforderlich." }, 403);
         }
         const form = await request.formData();
         const files = form.getAll("photos").filter(value => value instanceof File);
@@ -136,9 +146,8 @@ async function galleryApi(request, env, path) {
     }
 
     if (path === "/api/gallery" && request.method === "PATCH") {
-        const adminSecret = env.GALLERY_ADMIN_SECRET;
-        if (!adminSecret || request.headers.get("X-Gallery-Admin") !== adminSecret) {
-            return json({ error: "Admin-Schlüssel stimmt nicht." }, 403);
+        if (!await validAdminSession(request, env.SESSION_SECRET)) {
+            return json({ error: "Admin-Anmeldung erforderlich." }, 403);
         }
         let body;
         try {
@@ -166,9 +175,8 @@ async function galleryApi(request, env, path) {
     }
 
     if (path === "/api/gallery" && request.method === "DELETE") {
-        const adminSecret = env.GALLERY_ADMIN_SECRET;
-        if (!adminSecret || request.headers.get("X-Gallery-Admin") !== adminSecret) {
-            return json({ error: "Admin-Schlüssel stimmt nicht." }, 403);
+        if (!await validAdminSession(request, env.SESSION_SECRET)) {
+            return json({ error: "Admin-Anmeldung erforderlich." }, 403);
         }
         let body;
         try {
@@ -191,6 +199,35 @@ export async function onRequest(context) {
     const { request, env } = context;
     const url = new URL(request.url);
     const path = url.pathname;
+
+    if (path === "/admin/login" && request.method === "POST") {
+        const form = await request.formData();
+        const secret = form.get("secret");
+        if (typeof secret !== "string" || !env.GALLERY_ADMIN_SECRET || secret !== env.GALLERY_ADMIN_SECRET) {
+            return json({ error: "Admin-Schlüssel stimmt nicht." }, 403);
+        }
+        const expiry = String(Math.floor(Date.now() / 1000) + 86400);
+        const signature = await sign("admin:" + expiry, env.SESSION_SECRET);
+        return new Response(JSON.stringify({ ok: true }), {
+            headers: {
+                "Content-Type": "application/json; charset=utf-8",
+                "Cache-Control": "no-store",
+                "Set-Cookie": `admin_session=${expiry}.${signature}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=86400`
+            }
+        });
+    }
+    if (path === "/admin/logout" && request.method === "POST") {
+        return new Response(JSON.stringify({ ok: true }), {
+            headers: {
+                "Content-Type": "application/json; charset=utf-8",
+                "Cache-Control": "no-store",
+                "Set-Cookie": "admin_session=; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=0"
+            }
+        });
+    }
+    if (path === "/api/admin/session" && request.method === "GET") {
+        return json({ isAdmin: await validAdminSession(request, env.SESSION_SECRET) });
+    }
 
     if (path === "/login" && request.method === "POST") {
         const form = await request.formData();
