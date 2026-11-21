@@ -1,155 +1,94 @@
-
 <!DOCTYPE html>
 <html lang="de">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Cyber World</title>
-
-    <style>
-
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            min-height: 100vh;
-
-            background:
-                linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.75)),
-                url("Meine%20Website/image/brownie.jpg");
-
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-
-            color: #E8D5B5;
-            font-family: Georgia, serif;
-        }
-
-        /* NAVIGATION */
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 25px 7%;
-
-            border-bottom: 1px solid rgba(201,166,107,0.4);
-        }
-
-        .logo {
-            letter-spacing: 4px;
-            font-size: 16px;
-            color: #C9A66B;
-        }
-
-        nav a {
-            color: #E8D5B5;
-            text-decoration: none;
-            margin-left: 30px;
-            font-family: Arial, sans-serif;
-            font-size: 12px;
-            letter-spacing: 2px;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: #C9A66B;
-        }
-
-        /* HAUPTINHALT */
-
-        main {
-            text-align: center;
-            padding: 120px 20px;
-        }
-
-        .welcome {
-            color: #C9A66B;
-            letter-spacing: 6px;
-            font-size: 12px;
-        }
-
-        h1 {
-            font-size: clamp(38px, 6vw, 65px);
-            letter-spacing: 4px;
-            margin: 25px 0;
-        }
-
-        .description {
-            color: #D8C3A5;
-            font-family: Arial, sans-serif;
-            letter-spacing: 2px;
-            line-height: 2;
-        }
-
-        /* FOOTER */
-
-        footer {
-            text-align: center;
-            padding: 25px;
-            color: #A68B69;
-            font-size: 11px;
-            letter-spacing: 3px;
-        }
-
-        @media (max-width: 650px) {
-            header {
-                flex-direction: column;
-                gap: 20px;
-            }
-
-            nav a {
-                margin: 0 8px;
-            }
-
-            main {
-                padding-top: 90px;
-            }
-        }
-
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>N.'s Room — Cyber World</title>
+<style>
+:root{--espresso:#1A0803;--choco:#24110A;--wood:#382016;--gold:#C9A66B;--cream:#E8D5B5;--muted:#A98A68}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% 25%,#4a2a1b 0,#24110A 48%,#100501 100%);color:var(--cream);font-family:Georgia,serif;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.12;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");z-index:5}
+header{height:66px;padding:0 5%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #c9a66b55;background:#160903cc;position:relative;z-index:6}
+.logo{font-size:14px;letter-spacing:4px;color:var(--gold);text-shadow:0 0 12px #c9a66b66}
+nav{display:flex;gap:26px}nav a{font:11px Arial,sans-serif;letter-spacing:2px;color:var(--cream);text-decoration:none}nav a:hover{color:var(--gold)}
+.intro{text-align:center;padding:26px 15px 16px}.eyebrow{font:10px Arial,sans-serif;letter-spacing:4px;color:var(--gold)}h1{font-size:clamp(27px,4vw,43px);font-weight:normal;letter-spacing:3px;margin:9px 0 5px;text-shadow:0 0 18px #c18b4d66}.intro p{font:11px Arial,sans-serif;letter-spacing:2px;color:#c9ad8b;margin:0}
+.room-wrap{max-width:1180px;margin:0 auto;padding:0 22px 38px}
+.room{position:relative;min-height:610px;height:min(70vw,690px);max-height:690px;overflow:hidden;border:1px solid #c9a66b88;border-radius:5px;background:linear-gradient(180deg,#32190f 0%,#482919 68%,#24110a 68%,#1a0803 100%);box-shadow:0 20px 70px #0009,inset 0 0 70px #10050199}
+.wallpaper{position:absolute;inset:0 0 32% 0;background:repeating-linear-gradient(90deg,transparent 0 79px,#16090318 80px 82px),linear-gradient(180deg,#3c2016,#4a2b1d)}
+.floor{position:absolute;bottom:0;height:32%;width:100%;background:repeating-linear-gradient(0deg,#1b0b06 0 3px,#2d160d 4px 7px),repeating-linear-gradient(90deg,transparent 0 145px,#10050166 146px 149px)}
+.window{position:absolute;top:7%;left:7%;width:23%;height:31%;border:8px solid #28140d;outline:1px solid var(--gold);background:linear-gradient(145deg,#1a2635,#5a6270 55%,#b38a69);box-shadow:0 0 24px #d6a86b22}
+.window:before,.window:after{content:"";position:absolute;background:#2a160e}.window:before{width:5px;height:100%;left:50%}.window:after{height:5px;width:100%;top:50%}
+.curtain{position:absolute;top:5%;left:5%;width:27%;height:35%;border-left:13px solid #24110a;border-right:13px solid #24110a;pointer-events:none}
+.poster{position:absolute;top:8%;left:43%;width:13%;height:20%;border:5px solid #25130c;background:linear-gradient(145deg,#6c3b25,#1c0b06);box-shadow:0 4px 12px #0008;display:grid;place-items:center;text-align:center;color:#e4c28b;font:10px Arial;letter-spacing:2px;transform:rotate(-2deg)}
+.poster b{font:22px Georgia;color:var(--gold)}
+.shelf{position:absolute;top:34%;left:5%;width:30%;height:10px;background:#170905;box-shadow:0 4px 7px #0008}
+.shelf:before{content:"📚  💿  🕯️  🧸";position:absolute;bottom:8px;left:4px;font-size:25px;white-space:nowrap;filter:drop-shadow(0 2px 2px #000)}
+.desk{position:absolute;right:8%;top:38%;width:29%;height:13%;background:linear-gradient(#57321f,#2b160d);border:2px solid #6a4329;box-shadow:0 8px 15px #0008}
+.desk:before,.desk:after{content:"";position:absolute;top:100%;height:105px;width:9px;background:#1a0a05}.desk:before{left:12%}.desk:after{right:12%}
+.monitor{position:absolute;right:13%;top:21%;width:18%;height:17%;border:8px solid #180b07;border-radius:10px 10px 4px 4px;background:radial-gradient(circle at 50% 45%,#5b735e,#1a2923 75%);box-shadow:0 0 15px #c9a66b22;display:grid;place-items:center;color:#c9a66b;font:10px monospace;text-align:center}
+.monitor:after{content:"";position:absolute;width:28%;height:15px;background:#1a0b06;bottom:-22px;left:36%;border-radius:0 0 3px 3px}
+.rug{position:absolute;bottom:4%;left:30%;width:40%;height:26%;border-radius:50%;background:radial-gradient(ellipse,#754a30 0 46%,#3d2116 47% 61%,#9a7146 62% 64%,#2b150d 65%);opacity:.9}
+.bed{position:absolute;left:5%;bottom:12%;width:33%;height:29%;z-index:2}
+.bedhead{position:absolute;top:0;left:0;width:100%;height:23%;background:#1b0b07;border:2px solid #805837;border-radius:8px 8px 0 0}
+.mattress{position:absolute;top:20%;left:0;width:100%;height:68%;background:linear-gradient(135deg,#d0b18a,#805c43);border:5px solid #3b2115;border-radius:8px;box-shadow:0 9px 18px #0009}
+.pillow{position:absolute;top:25%;left:8%;width:33%;height:27%;background:#e4d1b5;border-radius:8px;box-shadow:inset 0 0 10px #7a5a42}
+.blanket{position:absolute;right:0;top:47%;width:64%;height:39%;background:linear-gradient(135deg,#49251a,#21100a);border:1px solid #9a7146;border-radius:4px}
+.bedlabel{position:absolute;bottom:0;left:20%;font:9px Arial;letter-spacing:3px;color:#d7b982}
+.plant{position:absolute;right:4%;bottom:7%;font-size:45px;filter:drop-shadow(0 5px 4px #0008)}
+.lamp{position:absolute;left:38%;top:35%;font-size:39px;filter:drop-shadow(0 0 13px #d9a45b77)}
+.object{position:absolute;z-index:4;border:1px solid #c9a66b99;background:linear-gradient(145deg,#3b2117dd,#160803ee);color:#f1dfc2;border-radius:5px;padding:9px 11px;min-width:88px;cursor:pointer;text-align:center;box-shadow:0 5px 14px #0008,inset 0 0 15px #c9a66b0d;transition:.2s;backdrop-filter:blur(4px)}
+.object:hover,.object:focus-visible{transform:translateY(-5px) scale(1.04);border-color:#f0d9a5;box-shadow:0 0 22px #c9a66b55;outline:none}
+.object .emoji{display:block;font-size:clamp(23px,3vw,34px);line-height:1.3}.object small{display:block;font:9px Arial,sans-serif;letter-spacing:1.5px;color:#d7b982;margin-top:4px}
+.mp3{left:37%;bottom:23%}.clothes{right:4%;top:55%}.sewing{left:42%;top:44%}.vinyl{left:5%;top:46%}.computer{right:11%;top:12%}.camera{left:40%;bottom:7%}.diary{right:30%;bottom:7%}
+.avatar{position:absolute;right:2%;bottom:1%;width:clamp(82px,12vw,135px);height:auto;z-index:4;image-rendering:pixelated;filter:drop-shadow(0 0 13px #d8ae6a66)}
+.avatar-note{position:absolute;right:3%;bottom:19%;z-index:4;color:#e4c28b;font:9px Arial;letter-spacing:1px;text-shadow:0 2px 4px #000}
+.statusbar{display:flex;justify-content:space-between;gap:10px;padding:10px 14px;background:#160903;border-top:1px solid #c9a66b66;font:9px Arial;letter-spacing:2px;color:#bda17d}
+.statusbar span:last-child{color:#c9a66b}
+footer{text-align:center;padding:5px 15px 28px;color:#80664c;font:9px Arial;letter-spacing:3px}
+.modal{position:fixed;inset:0;z-index:20;background:#090301d9;display:none;align-items:center;justify-content:center;padding:18px}.modal.open{display:flex}
+.panel{width:min(540px,100%);max-height:80vh;overflow:auto;background:linear-gradient(145deg,#321a10,#160803);border:1px solid var(--gold);box-shadow:0 0 35px #c9a66b33;padding:25px;position:relative}
+.close{position:absolute;right:13px;top:10px;background:none;border:0;color:var(--gold);font-size:23px;cursor:pointer}
+.panel-kicker{font:9px Arial;letter-spacing:3px;color:var(--gold)}.panel h2{font-weight:normal;letter-spacing:2px;margin:10px 0 16px}.panel-content{font:13px/1.8 Arial,sans-serif;color:#d9c5a8}.panel-content a{color:#e8c98f}.tag{display:inline-block;border:1px solid #9c784d;padding:5px 9px;margin:4px;font:10px Arial;color:#e8d5b5}
+@media(max-width:700px){header{height:auto;min-height:65px;flex-direction:column;gap:13px;padding:16px}nav{gap:20px}.room-wrap{padding:0 10px 25px}.room{height:780px;min-height:780px}.window{left:5%;top:5%;width:34%;height:19%}.curtain{left:3%;top:3%;width:38%;height:23%}.poster{left:51%;top:7%;width:24%;height:13%}.shelf{top:27%;width:48%}.monitor{top:28%;right:7%;width:29%;height:12%}.desk{top:41%;right:5%;width:42%;height:9%}.lamp{top:40%;left:43%}.bed{left:4%;bottom:15%;width:53%;height:23%}.rug{left:20%;width:65%;height:20%}.vinyl{left:3%;top:33%}.sewing{left:45%;top:51%}.mp3{left:5%;bottom:42%}.clothes{right:3%;top:56%}.camera{left:7%;bottom:5%}.diary{right:27%;bottom:5%}.computer{right:5%;top:19%}.avatar{width:90px;right:1%;bottom:1%}.avatar-note{right:2%;bottom:14%}.plant{font-size:35px;right:2%;bottom:9%}.statusbar{font-size:8px;letter-spacing:1px}}
+</style>
 </head>
-
 <body>
-
-    <header>
-
-        <div class="logo">
-            CYBER WORLD
-        </div>
-
-        <nav>
-            <a href="world.html">HOME</a>
-            <a href="about.html">ABOUT</a>
-        </nav>
-
-    </header>
-
-
-    <main>
-
-        <div class="welcome">
-            SYSTEM ACCESS GRANTED
-        </div>
-
-        <h1>WELCOME TO MY WORLD</h1>
-
-        <p class="description">
-            A DIFFERENT DIMENSION.<br>
-            A DIFFERENT EXPERIENCE.
-        </p>
-
-    </main>
-
-
-    <footer>
-        ● SYSTEM ONLINE
-    </footer>
-
+<header><div class="logo">N.'S CYBER ROOM ✧</div><nav><a href="world.html">MY ROOM</a><a href="about.html">ABOUT</a></nav></header>
+<section class="intro"><div class="eyebrow">PERSONAL DIGITAL ARCHIVE · EST. 2000-SOMETHING</div><h1>WELCOME TO MY ROOM</h1><p>CLICK AROUND · STAY A LITTLE · MAKE YOURSELF AT HOME</p></section>
+<div class="room-wrap"><section class="room" aria-label="Interaktives digitales Schlafzimmer">
+<div class="wallpaper"></div><div class="floor"></div><div class="window"></div><div class="curtain"></div>
+<div class="poster"><div><b>★</b><br>MAKE<br>MEMORIES</div></div><div class="shelf"></div>
+<div class="monitor">N.'S<br>DESKTOP</div><div class="desk"></div><div class="rug"></div>
+<div class="bed"><div class="bedhead"></div><div class="mattress"></div><div class="pillow"></div><div class="blanket"></div><div class="bedlabel">DO NOT DISTURB</div></div>
+<div class="lamp">🪔</div><div class="plant">🪴</div>
+<button class="object vinyl" data-panel="vinyl"><span class="emoji">💿</span><small>VINYL SHELF</small></button>
+<button class="object mp3" data-panel="music"><span class="emoji">🎵</span><small>MP3 PLAYER</small></button>
+<button class="object clothes" data-panel="fashion"><span class="emoji">👖</span><small>CLOTHES RACK</small></button>
+<button class="object sewing" data-panel="sewing"><span class="emoji">✂️</span><small>SEWING CORNER</small></button>
+<button class="object computer" data-panel="links"><span class="emoji">💻</span><small>COMPUTER</small></button>
+<button class="object camera" data-panel="gallery"><span class="emoji">📷</span><small>DIGICAM</small></button>
+<button class="object diary" data-panel="diary"><span class="emoji">📔</span><small>DIARY</small></button>
+<div class="avatar-note">that's me ✧</div><img class="avatar" src="Meine%20Website/image/Designer.png" alt="Pixel-Avatar mit goldener Krone">
+</section><div class="statusbar"><span>● ROOM STATUS: ONLINE</span><span>LUCKY CHARM: ♛ GOLD</span><span>VISITOR: YOU</span></div></div>
+<footer>MADE OF MEMORIES, MUSIC & A LITTLE BIT OF INTERNET MAGIC</footer>
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="panelTitle"><div class="panel"><button class="close" aria-label="Fenster schliessen" id="close">×</button><div class="panel-kicker">N.'S PERSONAL ARCHIVE</div><h2 id="panelTitle"></h2><div class="panel-content" id="panelContent"></div></div></div>
+<script>
+const panels={
+music:{title:"MP3 PLAYER",body:"<p>Soundtrack für die Stunden, die viel zu schnell vorbeigehen.</p><span class='tag'>FAVOURITE SONGS</span><span class='tag'>LATE NIGHT PLAYLIST</span><span class='tag'>2000s THROWBACKS</span><p>Deine Songs und Playlists können hier später ergänzt werden.</p>"},
+fashion:{title:"THE CLOTHES RACK",body:"<p>Outfits, Fundstücke und Ideen für den Kleiderschrank.</p><span class='tag'>BOOTCUT JEANS</span><span class='tag'>BOOTS</span><span class='tag'>LONGSLEEVES</span><span class='tag'>OUTFIT INSPO</span>"},
+sewing:{title:"SEWING CORNER",body:"<p>Eigene Designs, kleine Experimente und Nähprojekte.</p><p>Ein digitales Skizzenbuch für alles, was irgendwann Realität werden soll.</p>"},
+vinyl:{title:"VINYL COLLECTION",body:"<p>Schallplatten, Cover-Art und Alben, die einen Platz im Regal verdienen.</p><p>Die Sammlung wird Stück für Stück ergänzt.</p>"},
+links:{title:"THE COMPUTER",body:"<p>Meine Ecken im Internet.</p><p><a href='https://www.zalando.ch/' target='_blank' rel='noopener'>Zalando</a> · <a href='https://www.pinterest.com/' target='_blank' rel='noopener'>Pinterest</a> · <a href='https://www.youtube.com/' target='_blank' rel='noopener'>YouTube</a></p>"},
+gallery:{title:"DIGICAM GALLERY",body:"<p>Outfits, Schnappschüsse und kleine Erinnerungen.</p><p>Eine Galerie für Bilder, die hier ihren Platz bekommen.</p>"},
+diary:{title:"DEAR DIARY...",body:"<p>Ein privater Platz für kurze Gedanken, Notizen und Dinge, die man nicht vergessen möchte.</p><p><i>Some things are better kept in a little corner of the internet.</i></p>"}
+};
+const modal=document.getElementById("modal"),title=document.getElementById("panelTitle"),content=document.getElementById("panelContent");
+document.querySelectorAll("[data-panel]").forEach(button=>button.addEventListener("click",()=>{const p=panels[button.dataset.panel];title.textContent=p.title;content.innerHTML=p.body;modal.classList.add("open")}));
+function closeModal(){modal.classList.remove("open")}
+document.getElementById("close").addEventListener("click",closeModal);
+modal.addEventListener("click",e=>{if(e.target===modal)closeModal()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
+</script>
 </body>
 </html>
