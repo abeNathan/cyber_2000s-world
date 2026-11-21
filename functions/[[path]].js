@@ -80,6 +80,25 @@ async function galleryApi(request, env, path) {
         return json({ uploaded });
     }
 
+    if (path === "/api/gallery" && request.method === "DELETE") {
+        const adminSecret = env.GALLERY_ADMIN_SECRET;
+        if (!adminSecret || request.headers.get("X-Gallery-Admin") !== adminSecret) {
+            return json({ error: "Admin-Schlüssel stimmt nicht." }, 403);
+        }
+        let body;
+        try {
+            body = await request.json();
+        } catch {
+            return json({ error: "Ungültige Anfrage." }, 400);
+        }
+        const key = body && typeof body.key === "string" ? body.key : "";
+        if (!/^photos\\/[0-9a-f-]{36}\\.(jpg|png|webp|gif)$/i.test(key)) {
+            return json({ error: "Ungültiger Foto-Schlüssel." }, 400);
+        }
+        await env.GALLERY_BUCKET.delete(key);
+        return json({ deleted: true });
+    }
+
     return new Response("Method not allowed", { status: 405 });
 }
 
