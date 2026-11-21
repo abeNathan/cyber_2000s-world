@@ -195,6 +195,28 @@ async function galleryApi(request, env, path) {
     return new Response("Method not allowed", { status: 405 });
 }
 
+async function visitorsApi(request, env) {
+    if (!env.GALLERY_BUCKET) return json({ error: "Besucherzähler ist noch nicht verbunden." }, 503);
+    const cookie = request.headers.get("Cookie") || "";
+    const alreadyCounted = /(?:^|;\\s*)visitor_counted=1(?:;|$)/.test(cookie);
+    const key = "stats/visitor-count.json";
+    let count = 0;
+    const stored = await env.GALLERY_BUCKET.get(key);
+    if (stored) {
+        try {
+            const data = await stored.json();
+            count = Number.isSafeInteger(data.count) && data.count >= 0 ? data.count : 0;
+        } catch {}
+    }
+    const headers = new Headers({ "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
+    if (!alreadyCounted) {
+        count += 1;
+        await env.GALLERY_BUCKET.put(key, JSON.stringify({ count }));
+        headers.set("Set-Cookie", "visitor_counted=1; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=2592000");
+    }
+    return new Response(JSON.stringify({ count }), { headers });
+}
+
 export async function onRequest(context) {
     const { request, env } = context;
     const url = new URL(request.url);
@@ -247,9 +269,10 @@ export async function onRequest(context) {
     }
 
     const protectedPages = ["/world.html", "/world", "/about.html", "/about"];
+    const isVisitorsApi = path === "/api/visitors";
     const isDiaryApi = path === "/api/diary";
     const isGalleryApi = path === "/api/gallery" || path.startsWith("/api/gallery/");
-    if (protectedPages.includes(path) || isGalleryApi || isDiaryApi) {
+    if (protectedPages.includes(path) || isGalleryApi || isDiaryApi || isVisitorsApi) {
         const valid = await validSession(request, env.SESSION_SECRET);
         if (!valid) {
             if (isGalleryApi || isDiaryApi) return json({ error: "Bitte zuerst anmelden." }, 401);
@@ -257,6 +280,8 @@ export async function onRequest(context) {
         }
     }
 
+    if (isVisitorsApi && request.method === "POST") return visitorsApi(request, env);
+    if (isVisitorsApi) return new Response("Method not allowed", { status: 405 });
     if (isDiaryApi) return diaryApi(request, env, path);
     if (isGalleryApi) return galleryApi(request, env, path);
     return context.next();
