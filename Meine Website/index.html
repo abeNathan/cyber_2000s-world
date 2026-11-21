@@ -1,0 +1,335 @@
+
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Loading Into Cyber World</title>
+/* ENTER BUTTON */
+
+#enterButton {
+    margin-top: 30px;
+    padding: 13px 40px;
+    background: transparent;
+    border: 1px solid #C9A66B;
+    color: #E8D5B5;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    letter-spacing: 5px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+#enterButton:hover {
+    background: #C9A66B;
+    color: #1b120d;
+    box-shadow: 0 0 18px rgba(201, 166, 107, 0.4);
+}
+    
+    <style>
+
+        /* GRUNDLAYOUT */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background:
+                linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
+                url("image/brownie.jpg");
+
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: Georgia, serif;
+        }
+
+        /* HAUPTBEREICH */
+
+        .container {
+    width: min(520px, 90%);
+    margin-left: auto;
+    margin-right: 8%;
+    text-align: center;
+
+    opacity: 0;
+    animation: fadeIn 1.5s ease forwards;
+    animation-delay: 5s;
+}
+
+        /* STATUSANZEIGE */
+
+        .status {
+            color: #D8C3A5;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            letter-spacing: 5px;
+            margin-bottom: 30px;
+        }
+
+        /* HAUPTÜBERSCHRIFT */
+
+        h1 {
+            color: #E8D5B5;
+            font-size: clamp(38px, 5vw, 62px);
+            line-height: 1.2;
+            letter-spacing: 3px;
+            font-weight: 600;
+            margin: 28px 0;
+
+            text-shadow:
+                0 0 5px rgba(166, 106, 66, 0.5),
+                0 0 12px rgba(139, 94, 60, 0.3);
+        }
+
+        /* GOLDENE TRENNLINIEN */
+
+        .line {
+            width: 100%;
+            max-width: 390px;
+            height: 1px;
+            margin: 25px auto;
+
+            background: linear-gradient(
+                to right,
+                transparent,
+                #C9A66B,
+                #F0D9A5,
+                #C9A66B,
+                transparent
+            );
+        }
+
+        /* UNTERTITEL */
+
+        .subtitle {
+            color: #F1E5D0;
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            letter-spacing: 4px;
+            line-height: 1.8;
+            margin: 30px 0;
+        }
+
+        /* FORTSCHRITTSBALKEN HAUPTSEITE */
+
+        .progress-bar {
+            width: 75%;
+            height: 3px;
+            margin: 35px auto;
+            background: rgba(216, 195, 165, 0.25);
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            width: 100%;
+            height: 100%;
+
+            background: linear-gradient(
+                to right,
+                #A66A42,
+                #E8D5B5,
+                #C9A66B
+            );
+
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: loading 5s linear forwards;
+        }
+
+        @keyframes loading {
+            to {
+                transform: scaleX(1);
+            }
+        }
+
+        /* SYSTEMSTATUS */
+
+        .system {
+            color: #C9A66B;
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            letter-spacing: 4px;
+            margin-top: 25px;
+        }
+
+        /* LADEBILDSCHIRM */
+
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: #1b120d;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            z-index: 9999;
+            color: #D8C3A5;
+            font-family: Arial, sans-serif;
+
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        #loader h2 {
+            letter-spacing: 5px;
+            margin-bottom: 25px;
+        }
+
+       .loader-bar {
+    width: 280px;
+    height: 4px;
+    background: #4a3528;
+    overflow: hidden;
+}
+
+#progress {
+    width: 0%;
+    height: 100%;
+    background: #D8C3A5;
+}
+
+
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+
+            .container {
+                margin: 0 auto;
+                width: 90%;
+            }
+
+            h1 {
+                font-size: 38px;
+            }
+
+            .status {
+                font-size: 10px;
+            }
+
+            .subtitle {
+                font-size: 11px;
+            }
+        }
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+    </style>
+</head>
+
+<body>
+
+    <!-- LADEBILDSCHIRM -->
+
+  <div id="loader">
+
+    <h2>LOADING...</h2>
+
+    <div class="loader-bar">
+        <div id="progress"></div>
+    </div>
+
+    <p>INITIALIZING SYSTEM</p>
+
+</div>
+
+
+    <!-- HAUPTSEITE -->
+
+    <div class="container">
+
+        <div class="status">
+            SYSTEM INITIALIZING
+        </div>
+<button id="enterButton" onclick="window.location.href='login.html'">ENTER</button>
+
+        <div class="line"></div>
+
+        <h1>
+            LOADING INTO<br>
+            CYBER WORLD
+        </h1>
+
+        <div class="line"></div>
+
+        <p class="subtitle">
+            WELCOME TO ANOTHER DIMENSION
+        </p>
+
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+
+        <div class="system">
+            ● SYSTEM ONLINE
+        </div>
+
+    </div>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+    window.addEventListener("load", function() {
+
+        const loader = document.getElementById("loader");
+        const progress = document.getElementById("progress");
+
+        const duration = 5000;
+        const start = performance.now();
+
+        function updateProgress(now) {
+
+            const elapsed = now - start;
+            const percentage = Math.min((elapsed / duration) * 100, 100);
+
+            progress.style.width = percentage + "%";
+
+            if (percentage < 100) {
+
+                requestAnimationFrame(updateProgress);
+
+            } else {
+
+                loader.style.transition = "opacity 0.5s ease";
+                loader.style.opacity = "0";
+
+                setTimeout(function() {
+                    loader.style.display = "none";
+                }, 500);
+
+            }
+        }
+
+        requestAnimationFrame(updateProgress);
+
+    });
+
+</script>
+</script>
+
+    </script>
+
+</body>
+</html>
