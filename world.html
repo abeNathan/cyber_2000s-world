@@ -158,7 +158,7 @@ footer{text-align:center;padding:5px 15px 28px;color:#80664c;font:9px Arial;lett
 .admin-only{display:none!important}
 body.admin-mode .admin-only{display:block!important}
 body.admin-mode form.admin-only{display:block!important}
-.admin-access{background:transparent;border:1px solid #9b783f;color:#d9b66f;padding:5px 9px;font:inherit;font-size:10px;letter-spacing:1px;cursor:pointer}
+.admin-access{background:transparent;border:1px solid transparent;color:#b99a68;padding:5px 7px;font:inherit;font-size:13px;line-height:1;opacity:.48;cursor:pointer;transition:opacity .2s,text-shadow .2s,color .2s}.admin-access:hover,.admin-access:focus-visible{opacity:1;color:#e8c98f;text-shadow:0 0 10px #d5ad6b;outline:none}
 </style>
 </head>
 <body>
@@ -178,7 +178,7 @@ body.admin-mode form.admin-only{display:block!important}
 <button class="object camera" data-panel="gallery"><span class="emoji">📷</span><small>DIGICAM</small></button>
 <button class="object diary" data-panel="diary"><span class="emoji">📔</span><small>DIARY</small></button>
 <div class="avatar-note">that's me ✧</div><img class="avatar" src="Meine%20Website/image/Designer.png" alt="Pixel-Avatar mit goldener Krone">
-</section><div class="statusbar"><span>● ROOM STATUS: ONLINE</span><span>LUCKY CHARM: ♛ GOLD</span><span>LOCAL TIME: <b id="roomClock">--:--</b></span><span><button id="glowToggle" class="glow-toggle" type="button">✧ GLOW: OFF</button></span><span><button id="adminAccess" class="admin-access" type="button">✧ ADMIN</button></span></div></div>
+</section><div class="statusbar"><span>● ROOM STATUS: ONLINE</span><span>LUCKY CHARM: ♛ GOLD</span><span>LOCAL TIME: <b id="roomClock">--:--</b></span><span><button id="glowToggle" class="glow-toggle" type="button">✧ GLOW: OFF</button></span><span><button id="adminAccess" class="admin-access" type="button" title="Admin-Zugang" aria-label="Admin-Zugang">✧</button></span></div></div>
 <footer>MADE OF MEMORIES, MUSIC & A LITTLE BIT OF INTERNET MAGIC</footer>
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="panelTitle"><div class="panel"><button class="close" aria-label="Fenster schliessen" id="close">×</button><div class="panel-kicker">N.'S PERSONAL ARCHIVE</div><h2 id="panelTitle"></h2><div class="panel-content" id="panelContent"></div></div></div>
 <script>
