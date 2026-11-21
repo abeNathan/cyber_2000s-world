@@ -178,10 +178,23 @@ body.admin-mode form.admin-only{display:block!important}
 <button class="object camera" data-panel="gallery"><span class="emoji">📷</span><small>DIGICAM</small></button>
 <button class="object diary" data-panel="diary"><span class="emoji">📔</span><small>DIARY</small></button>
 <div class="avatar-note">that's me ✧</div><img class="avatar" src="Meine%20Website/image/Designer.png" alt="Pixel-Avatar mit goldener Krone">
-</section><div class="statusbar"><span>● ROOM STATUS: ONLINE</span><span>LUCKY CHARM: ♛ GOLD</span><span>LOCAL TIME: <b id="roomClock">--:--</b></span><span><button id="glowToggle" class="glow-toggle" type="button">✧ GLOW: OFF</button></span><span><button id="adminAccess" class="admin-access" type="button" title="Admin-Zugang" aria-label="Admin-Zugang">✧</button></span></div></div>
+</section><div class="statusbar"><span>● ROOM STATUS: ONLINE</span><span>LUCKY CHARM: ♛ GOLD</span><span>VISITORS: <b id="visitorCount">---</b></span><span>LOCAL TIME: <b id="roomClock">--:--</b></span><span><button id="glowToggle" class="glow-toggle" type="button">✧ GLOW: OFF</button></span><span><button id="adminAccess" class="admin-access" type="button" title="Admin-Zugang" aria-label="Admin-Zugang">✧</button></span></div></div>
 <footer>MADE OF MEMORIES, MUSIC & A LITTLE BIT OF INTERNET MAGIC</footer>
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="panelTitle"><div class="panel"><button class="close" aria-label="Fenster schliessen" id="close">×</button><div class="panel-kicker">N.'S PERSONAL ARCHIVE</div><h2 id="panelTitle"></h2><div class="panel-content" id="panelContent"></div></div></div>
 <script>
+async function loadVisitorCount(){
+try{
+const response=await fetch("/api/visitors",{method:"POST",credentials:"same-origin",cache:"no-store"});
+if(!response.ok)throw new Error("Besucherzähler nicht verfügbar");
+const data=await response.json();
+const counter=document.getElementById("visitorCount");
+if(counter)counter.textContent=String(data.count).padStart(5,"0");
+}catch(error){
+const counter=document.getElementById("visitorCount");
+if(counter)counter.textContent="-----";
+}
+}
+loadVisitorCount();
 const panels={
 music:{title:"MP3 PLAYER",body:"<p>YOUR PERSONAL SOUNDTRACK · PORTABLE MEMORIES</p><div class='mp3-window'><div class='mp3-device'><div class='mp3-screen'><strong>NOW PLAYING</strong>NO TRACK SELECTED<br>PLAYLIST: YOUR MIX<br>BATTERY: █████ 100%</div><div class='mp3-wheel'>MENU　●</div></div><div class='mp3-tracks'><h3>PLAYLIST LIBRARY</h3><div class='mp3-track'>01 · FAVOURITE SONGS <span>—:—</span></div><div class='mp3-track'>02 · LATE NIGHT MIX <span>—:—</span></div><div class='mp3-track'>03 · 2000s THROWBACKS <span>—:—</span></div><div class='mp3-track'>04 · ON REPEAT <span>—:—</span></div></div></div><p class='mp3-note'>Your music corner is ready. Song titles and real playback can be added when your track list is ready.</p>"},
 fashion:{title:"THE CLOTHES RACK",body:"<p>PERSONAL STYLE FILES · 2000s INSPIRED</p><div class='fashion-board'><div class='fashion-heading'><span>WARDROBE INDEX</span><span>NO. 001—003</span></div><div class='fashion-grid'><div class='fashion-card'><div class='fashion-visual'>👖</div><strong>BOOTCUT DENIM</strong><small>LOW-RISE · VINTAGE FIT</small></div><div class='fashion-card'><div class='fashion-visual'>🥾</div><strong>BOOTS</strong><small>EVERYDAY CLASSIC</small></div><div class='fashion-card'><div class='fashion-visual'>👕</div><strong>LONGSLEEVES</strong><small>LAYERING PIECES</small></div></div><div class='fashion-footer'>STYLE NOTE: relaxed silhouettes, vintage details and outfits that feel like your own.</div></div><p>Dein digitales Lookbook. Eigene Outfit-Fotos und Inspirationen können später hier dazukommen.</p>"},
